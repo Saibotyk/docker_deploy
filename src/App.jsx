@@ -105,6 +105,8 @@ const Container = styled.div`
 
   @media screen and (max-width: 900px) {
 
+    height: 100vh;
+
     h1{
       font-size: 1rem;
     }

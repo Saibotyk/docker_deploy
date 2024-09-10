@@ -64,8 +64,9 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 5rem 5rem;
+  margin: 5rem;
   gap: 2rem;
+
   h1{
     font-family: "Playwrite CU", cursive;
     font-size: 3rem;
@@ -100,6 +101,22 @@ const Container = styled.div`
     color: pink;
     transform: scale(1.1);
     transition: transform 250ms ease-in-out;
+  }
+
+  @media screen and (max-width: 900px) {
+
+    h1{
+      font-size: 1rem;
+    }
+
+    .img {
+    width: 100%;
+  }
+
+  .btn{
+    font-size: 1rem;
+  }
+
   }
 `;
 

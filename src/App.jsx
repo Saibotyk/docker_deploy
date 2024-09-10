@@ -1,35 +1,106 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from 'react';
+import styled from 'styled-components';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const cupcakesArray = [
+    "https://i.ibb.co/jMNg3Rd/cupcake1.webp",
+    "https://i.ibb.co/1KcgshH/cupcake3.webp",
+    "https://i.ibb.co/dDN17Gv/cupcake13.webp",
+    "https://i.ibb.co/xjDtRWk/cupcake12.webp",
+    "https://i.ibb.co/VpNZvcT/cupcake11.webp",
+    "https://i.ibb.co/Xtyz15X/cupcake2.webp",
+    "https://i.ibb.co/8ctKCjs/cupcake4.webp",
+    "https://i.ibb.co/12RfZKd/cupcake5.webp",
+    "https://i.ibb.co/9V9vL4H/cupcake6.webp",
+    "https://i.ibb.co/5GQ653W/cupcake7.webp",
+    "https://i.ibb.co/c1rRV71/cupcake8.webp",
+    "https://i.ibb.co/t8NKtpG/cupcake9.webp",
+    "https://i.ibb.co/3BqgckJ/cupcake10.webp"
+  ];
+
+  const [cupcakeIndex, setCupcakeIndex] = useState(0);
+  const [isChanging, setIsChanging] = useState(false);
+
+  const changeIdWithEffect = () => {
+    if (isChanging) return; 
+
+    setIsChanging(true); 
+    let intervalId;
+    let count = 0;
+    const maxCount = 15; 
+
+    
+    intervalId = setInterval(() => {
+      setCupcakeIndex((prevIndex) => (prevIndex + 1) % cupcakesArray.length);
+      count++;
+
+      if (count >= maxCount) {
+        clearInterval(intervalId);
+
+        let newIndex;
+        do {
+          newIndex = Math.floor(Math.random() * cupcakesArray.length);
+        } while (newIndex === cupcakeIndex);
+
+        setCupcakeIndex(newIndex);
+        setIsChanging(false);
+      }
+    }, 100);
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <Container>
+      <h1>Tu Veux Un Cupcake ?</h1>
+      <img className="img" src={cupcakesArray[cupcakeIndex]} alt="Cupcake" />
+      <button className='btn' onClick={changeIdWithEffect} disabled={isChanging}>
+        {isChanging ? "Changement en cours..." : "Changer"}
+      </button>
+    </Container>
+  );
 }
 
-export default App
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 5rem 5rem;
+  gap: 2rem;
+  h1{
+    font-family: "Playwrite CU", cursive;
+    font-size: 3rem;
+    color: purple;
+    margin: 0;  
+  }
+
+  .img {
+    width: 25%;
+    border-radius: 14px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+  }
+
+  .btn {
+    font-size: 2rem;
+    background-color: pink;
+    color: purple;
+    border: solid purple 2px;
+    border-radius: 50px;
+    padding: 1rem;
+  }
+
+  .btn:disabled {
+    background-color: lightgrey;
+    color: darkgrey;
+    cursor: not-allowed;
+  }
+
+  .btn:hover:not(:disabled) {
+    cursor: pointer;
+    background-color: purple;
+    color: pink;
+    transform: scale(1.1);
+    transition: transform 250ms ease-in-out;
+  }
+`;
+
+export default App;

@@ -72,6 +72,9 @@ const Container = styled.div`
     font-size: 3rem;
     color: purple;
     margin: 0;  
+    background-color: pink;
+    padding: .5rem;
+    border-radius: 8px;
   }
 
   .img {
@@ -105,7 +108,7 @@ const Container = styled.div`
 
   @media screen and (max-width: 900px) {
 
-    height: 100vh;
+    height: 65vh;
 
     h1{
       font-size: 1rem;
